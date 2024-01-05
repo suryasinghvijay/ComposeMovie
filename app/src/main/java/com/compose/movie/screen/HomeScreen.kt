@@ -1,7 +1,6 @@
 package com.compose.movie.screen
 
 import android.util.Log
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -38,7 +37,9 @@ import com.compose.movie.R
 import com.compose.movie.model.Result
 import com.compose.movie.ui.theme.ComposeMovieTheme
 import com.compose.movie.viewmodel.HomeScreenViewModel
+import java.text.SimpleDateFormat
 
+val simpleDateFormat = SimpleDateFormat("MMMMM yyyy")
 const val POPULAR_MOVIE_POSTER_PATH = "https://www.themoviedb.org/t/p/w220_and_h330_face"
 
 @Composable fun HomeScreen(modifier: Modifier = Modifier) {
@@ -91,7 +92,6 @@ const val POPULAR_MOVIE_POSTER_PATH = "https://www.themoviedb.org/t/p/w220_and_h
     Box() {
         Column(
             modifier = modifier.wrapContentHeight().width(150.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             Box() {
                 AsyncImage(
@@ -104,7 +104,7 @@ const val POPULAR_MOVIE_POSTER_PATH = "https://www.themoviedb.org/t/p/w220_and_h
                 )
                 Box(modifier = Modifier.align(Alignment.BottomEnd)) { //
                     CircularProgressIndicator(
-                        modifier = Modifier.align(Alignment.BottomEnd).width(48.dp).height(48.dp)
+                        modifier = Modifier.width(48.dp).height(48.dp)
                             .padding(top = 15.dp),
                         color = Color(0xFF009688),
                         trackColor = Color.White,
@@ -122,7 +122,7 @@ const val POPULAR_MOVIE_POSTER_PATH = "https://www.themoviedb.org/t/p/w220_and_h
                     )
                 }
             }
-
+            Spacer(modifier = modifier.height(8.dp))
             Text(
                 text = result.title,
                 modifier = modifier.wrapContentWidth().padding(start = 8.dp, end = 8.dp, top = 4.dp),
