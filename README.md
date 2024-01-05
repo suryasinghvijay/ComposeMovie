@@ -1,5 +1,5 @@
 ## Demo app for exploring compose framework
- Tring to build a clone of [themoviedb]([https://themoviedb.org/]) website. Please feel free to contribute & share knowledge because 
+ Tring to build a clone of [themoviedb](https://themoviedb.org/) website. Please feel free to contribute & share knowledge because 
  **The only thing to do with good advice is to pass it on. It is never of any use to oneself. – Oscar Wilde**
 
 ## The app contains following libraries
