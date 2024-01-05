@@ -1,5 +1,8 @@
 package com.compose.movie.model
 
+import androidx.compose.runtime.Immutable
+
+@Immutable
 data class Result(
     val adult: Boolean,
     val backdrop_path: String,

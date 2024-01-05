@@ -23,6 +23,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -92,17 +93,39 @@ const val POPULAR_MOVIE_POSTER_PATH = "https://www.themoviedb.org/t/p/w220_and_h
             modifier = modifier.wrapContentHeight().width(150.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
-            AsyncImage(
-                model = ImageRequest.Builder(LocalContext.current).data(POPULAR_MOVIE_POSTER_PATH.plus(result.poster_path))
-                    .crossfade(true).build(),
-                placeholder = painterResource(R.drawable.ic_launcher_foreground),
-                contentDescription = "stringResource(R.string.description)",
-                contentScale = ContentScale.FillBounds,
-                modifier = Modifier.clip(RoundedCornerShape(8.dp)).width(150.dp).height(250.dp),
-            )
+            Box() {
+                AsyncImage(
+                    model = ImageRequest.Builder(LocalContext.current).data(POPULAR_MOVIE_POSTER_PATH.plus(result.poster_path))
+                        .crossfade(true).build(),
+                    placeholder = painterResource(R.drawable.ic_launcher_foreground),
+                    contentDescription = "stringResource(R.string.description)",
+                    contentScale = ContentScale.FillBounds,
+                    modifier = Modifier.clip(RoundedCornerShape(8.dp)).width(150.dp).height(200.dp),
+                )
+                Box(modifier = Modifier.align(Alignment.BottomEnd)) { //
+                    CircularProgressIndicator(
+                        modifier = Modifier.align(Alignment.BottomEnd).width(48.dp).height(48.dp)
+                            .padding(top = 15.dp),
+                        color = Color(0xFF009688),
+                        trackColor = Color.White,
+                        progress = result.vote_average.div(10).toFloat(), // Set progress based on your logic
+                        strokeWidth = 6.dp,
+                    )
+                    Text(
+                        text = "".plus(result.vote_average.times(10).toInt()).plus("%"),
+                        modifier = modifier.align(Alignment.BottomEnd).wrapContentWidth()
+                            .padding(start = 12.dp, end = 8.dp, bottom = 4.dp),
+                        textAlign = TextAlign.Start,
+                        color = Color.LightGray,
+                        style = MaterialTheme.typography.bodyMedium,
+                        fontWeight = FontWeight.Bold,
+                    )
+                }
+            }
+
             Text(
-                text = result.original_title,
-                modifier = modifier.wrapContentWidth().padding(start = 8.dp, end = 8.dp),
+                text = result.title,
+                modifier = modifier.wrapContentWidth().padding(start = 8.dp, end = 8.dp, top = 4.dp),
                 textAlign = TextAlign.Start,
                 style = MaterialTheme.typography.bodyMedium,
                 fontWeight = FontWeight.SemiBold, // minLines = 2,
