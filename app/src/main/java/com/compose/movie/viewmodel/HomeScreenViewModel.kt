@@ -42,7 +42,7 @@ import javax.inject.Inject
                 Log.e("TAG", "Thread is ${Thread.currentThread()}") // movieDetail.value = DataState.Loading
                 _isLoading.value = true
             }.onEach {
-                Log.e("TAG", "for each happened ${it.total_results}")
+                Log.e("TAG", "for each happened ${it.totalResults}")
                 Log.e("TAG", "Thread is ${Thread.currentThread()}")
                 movieDetail.value = it.results
             }.catch {
@@ -61,7 +61,7 @@ import javax.inject.Inject
                 Log.e("TAG", "Thread is ${Thread.currentThread()}") // movieDetail.value = DataState.Loading
                 _isLoading.value = true
             }.onEach {
-                Log.e("TAG", "for each happened ${it.total_results}")
+                Log.e("TAG", "for each happened ${it.totalResults}")
                 Log.e("TAG", "Thread is ${Thread.currentThread()}")
                 topRatedMovieDetail.value = it.results
             }.catch {

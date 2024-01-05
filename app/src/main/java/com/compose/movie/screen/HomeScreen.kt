@@ -38,8 +38,9 @@ import com.compose.movie.model.Result
 import com.compose.movie.ui.theme.ComposeMovieTheme
 import com.compose.movie.viewmodel.HomeScreenViewModel
 import java.text.SimpleDateFormat
+import java.util.Locale
 
-val simpleDateFormat = SimpleDateFormat("MMMMM yyyy")
+val simpleDateFormat = SimpleDateFormat("MMMMM yyyy", Locale.ENGLISH)
 const val POPULAR_MOVIE_POSTER_PATH = "https://www.themoviedb.org/t/p/w220_and_h330_face"
 
 @Composable fun HomeScreen(modifier: Modifier = Modifier) {
@@ -95,7 +96,7 @@ const val POPULAR_MOVIE_POSTER_PATH = "https://www.themoviedb.org/t/p/w220_and_h
         ) {
             Box() {
                 AsyncImage(
-                    model = ImageRequest.Builder(LocalContext.current).data(POPULAR_MOVIE_POSTER_PATH.plus(result.poster_path))
+                    model = ImageRequest.Builder(LocalContext.current).data(POPULAR_MOVIE_POSTER_PATH.plus(result.posterPath))
                         .crossfade(true).build(),
                     placeholder = painterResource(R.drawable.ic_launcher_foreground),
                     contentDescription = "stringResource(R.string.description)",
@@ -108,11 +109,11 @@ const val POPULAR_MOVIE_POSTER_PATH = "https://www.themoviedb.org/t/p/w220_and_h
                             .padding(top = 15.dp),
                         color = Color(0xFF009688),
                         trackColor = Color.White,
-                        progress = result.vote_average.div(10).toFloat(), // Set progress based on your logic
+                        progress = result.voteAverage.div(10).toFloat(), // Set progress based on your logic
                         strokeWidth = 6.dp,
                     )
                     Text(
-                        text = "".plus(result.vote_average.times(10).toInt()).plus("%"),
+                        text = "".plus(result.voteAverage.times(10).toInt()).plus("%"),
                         modifier = modifier.align(Alignment.BottomEnd).wrapContentWidth()
                             .padding(start = 12.dp, end = 8.dp, bottom = 4.dp),
                         textAlign = TextAlign.Start,
@@ -132,11 +133,11 @@ const val POPULAR_MOVIE_POSTER_PATH = "https://www.themoviedb.org/t/p/w220_and_h
                 maxLines = 2,
             )
             Text(
-                text = result.release_date,
+                text = result.releaseDate,
                 modifier = modifier.wrapContentWidth().padding(start = 8.dp, end = 8.dp),
                 textAlign = TextAlign.Start,
                 style = MaterialTheme.typography.labelMedium,
-                fontWeight = FontWeight.Light,
+                fontWeight = FontWeight.Normal,
             )
         }
     }
