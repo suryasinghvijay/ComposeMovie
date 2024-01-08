@@ -50,7 +50,7 @@ const val POPULAR_MOVIE_POSTER_PATH = "https://www.themoviedb.org/t/p/w220_and_h
         movieDetailViewModel.fetchPopularMovies()
         movieDetailViewModel.fetchTopRatedMovieList()
     }
-    Column {
+    Column(modifier = modifier.fillMaxSize()) {
         movieDetailViewModel.movies.collectAsState().value?.let {
             Log.e("TAG", "observerCalled $it ")
             PopularMovieList(it, title = "Trending")
@@ -105,10 +105,9 @@ const val POPULAR_MOVIE_POSTER_PATH = "https://www.themoviedb.org/t/p/w220_and_h
                 )
                 Box(modifier = Modifier.align(Alignment.BottomEnd)) { //
                     CircularProgressIndicator(
-                        modifier = Modifier.width(48.dp).height(48.dp)
-                            .padding(top = 15.dp),
-                        color = Color(0xFF009688),
-                        trackColor = Color.White,
+                        modifier = Modifier.width(48.dp).height(48.dp).padding(top = 15.dp),
+                        color = Color.White,
+                        trackColor = MaterialTheme.colorScheme.primary,
                         progress = result.voteAverage.div(10).toFloat(), // Set progress based on your logic
                         strokeWidth = 6.dp,
                     )

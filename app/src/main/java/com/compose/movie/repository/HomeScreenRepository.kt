@@ -24,4 +24,9 @@ class HomeScreenRepository @Inject constructor(
         val response = apiService.getTopRatedMovieList()
         emit(response)
     }
+
+    suspend fun fetchMovieDetails(movieId: String) = flow {
+        val response = apiService.getMovieDetails(movieId)
+        emit(response)
+    }
 }
